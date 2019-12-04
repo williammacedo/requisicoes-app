@@ -16,6 +16,10 @@ export class AuthenticationService {
     this.user = afAuth.authState;
   }
 
+  authUser(): Observable<firebase.User> {
+    return this.user;
+  }
+
   login(email: string, senha: string): Promise<firebase.auth.UserCredential> {
     return this.afAuth.auth.signInWithEmailAndPassword(email, senha);
   }
@@ -24,7 +28,7 @@ export class AuthenticationService {
     return this.afAuth.auth.signOut();
   }
 
-  resetPassword(email: string) {
-    this.afAuth.auth.sendPasswordResetEmail(email);
+  resetPassword(email: string): Promise<void> {
+    return this.afAuth.auth.sendPasswordResetEmail(email);
   }
 }
